@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricPrompt;
 import androidx.fragment.app.FragmentActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +13,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
-    Button BotonLogin, BotonRegistro;
-    EditText EditTextEmail, EditTextPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
