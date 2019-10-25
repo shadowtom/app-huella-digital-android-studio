@@ -4,22 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricPrompt;
 import androidx.fragment.app.FragmentActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import Control.BiometricPromptHelper;
 
-public class MainActivity extends AppCompatActivity {
+public class ConfirmacionHuella extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.confirmacion_huella);
         Executor executor = Executors.newSingleThreadExecutor();
 
         FragmentActivity activity = this;
@@ -38,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
-                //TODO: Called when a biometric is recognized.
+                Intent ToIndex = new Intent(getApplicationContext(), Index.class);
+                startActivity(ToIndex);
+                finish();
             }
 
             @Override
