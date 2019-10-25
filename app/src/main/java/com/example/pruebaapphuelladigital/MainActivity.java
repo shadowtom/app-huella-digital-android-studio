@@ -12,6 +12,8 @@ import android.widget.EditText;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import Control.BiometricPromptHelper;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -46,17 +48,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Set the title to display.")
-                .setSubtitle("Set the subtitle to display.")
-                .setDescription("Set the description to display")
-                .setNegativeButtonText("Negative Button")
-                .build();
+        final BiometricPromptHelper promptHelper=new BiometricPromptHelper();
+
 
         findViewById(R.id.authenticateButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                biometricPrompt.authenticate(promptInfo);
+                biometricPrompt.authenticate(promptHelper.helper());
             }
         });
 
