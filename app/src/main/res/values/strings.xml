@@ -5,4 +5,16 @@
     <string name="btnLogin">Ingresar</string>
     <string name="btnRegister">Registrarse</string>
     <string name="authenticate">Authenticate</string>
+    <string name="GoogleRegister">Registrate con Google</string>
+    <string name="UserName">Nombre completo</string>
+    <string name="phoneNumberHint">Phone Number</string>
+    <string name="phonelenght">Enter a Valid phone number with +(country code)</string>
+    <string name="phoneError">A phone number is required</string>
+    <string name="codeVerification">Enter a valid Code</string>
+    <string name="verificationCodeHint">Verification code</string>
+    <string name="verificationDescription">A verification code has been sent to your phone</string>
+    <string name="verifyCodeButton">Verify code</string>
+    <string name="WelcomeMessage">Welcome to KNXBank</string>
+    <string name="knxLogo" translatable="false">Logo</string>
+    <string name="google_status_fmt" />
 </resources>
