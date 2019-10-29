@@ -12,9 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +24,6 @@ import java.util.concurrent.Executors;
 
 import Control.BiometricPromptHelper;
 import Model.Cliente;
-import main.java.VoiceIt2;
 
 public class Login extends AppCompatActivity {
     Button ButtonLogin,ButtonRegister;
@@ -35,7 +32,6 @@ public class Login extends AppCompatActivity {
     DatabaseReference databasereference;
     FirebaseDatabase firebaseDatabase;
     EditText UserMail,UserPass;
-    String Usuario=UserMail.getText().toString(),Pass=UserPass.getText().toString();
 
     Executor executor = Executors.newSingleThreadExecutor();
     FragmentActivity activity = this;
@@ -88,6 +84,7 @@ public class Login extends AppCompatActivity {
                 .build();
     }*/
     private void loginfirebase() {
+        final String Usuario=UserMail.getText().toString(),Pass=UserPass.getText().toString();
         final String[] model = new String[1];
 
         //validacion telefono firebase
