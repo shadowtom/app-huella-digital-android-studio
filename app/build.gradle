@@ -36,5 +36,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:18.0.1'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.kyanogen.signatureview:signature-view:1.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
 apply plugin: 'com.google.gms.google-services'

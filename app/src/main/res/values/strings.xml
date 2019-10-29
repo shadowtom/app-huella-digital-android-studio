@@ -16,5 +16,15 @@
     <string name="verifyCodeButton">Verify code</string>
     <string name="WelcomeMessage">Welcome to KNXBank</string>
     <string name="knxLogo" translatable="false">Logo</string>
+    <string name="UserDNI">DNI</string>
+    <string name="UserBirthDate">Fecha de Nacimiento</string>
+    <string name="EmailSender">Desea enviar correo electronico de confirmacion?</string>
+
+
+
+
+
     <string name="google_status_fmt" />
+    <string name="title_activity_index">Index</string>
+    <string name="title_activity_register_new_client">RegisterNewClient</string>
 </resources>

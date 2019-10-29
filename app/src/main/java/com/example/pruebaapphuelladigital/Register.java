@@ -66,7 +66,7 @@ public class Register extends AppCompatActivity {
         user.setClave(pass);
         user.setCorreo(correo);
         user.setPhone(PhoneNumber);
-        databasereference.child("Cliente").child(user.getID()).setValue(user);
+        databasereference.child("Usuario").child(user.getID()).setValue(user);
     }
     private void areaCode() {
         String code = CountryData.countryAreaCodes[countryCodes.getSelectedItemPosition()];
