@@ -3,6 +3,8 @@
     package="com.example.pruebaapphuelladigital">
 
     <uses-permission android:name="androidx.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -12,8 +14,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Register"></activity>
         <activity android:name=".Index" />
-        <activity android:name=".Login">
-        </activity>
+        <activity android:name=".Login"/>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

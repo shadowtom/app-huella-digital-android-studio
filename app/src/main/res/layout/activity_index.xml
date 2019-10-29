@@ -10,9 +10,27 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="109dp"
-        android:text="ConfirmacionExitosa"
+        android:text="Prueba de firma"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.386" />
+
+    <com.kyanogen.signatureview.SignatureView
+        android:id="@+id/signature_view"
+        android:layout_width="410dp"
+        android:layout_height="315dp"
+        android:layout_marginTop="108dp"
+        android:layout_weight="1"
+        app:backgroundColor="#FFFFFF"
+        app:enableSignature="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0"
+        app:penColor="#000000"
+        app:penSize="5dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
