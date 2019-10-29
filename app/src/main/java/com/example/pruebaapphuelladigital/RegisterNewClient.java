@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.UUID;
@@ -26,6 +27,7 @@ public class RegisterNewClient extends AppCompatActivity {
     EditText nombre,Correo,Telefono,FechaDeNacimiento,DNI;
     CheckBox SenderEmail;
     DatabaseReference databasereference;
+    TextView DatosClientes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class RegisterNewClient extends AppCompatActivity {
         FechaDeNacimiento=findViewById(R.id.NewClientBirthDate);
         DNI=findViewById(R.id.NewClientDNI);
         SenderEmail=findViewById(R.id.NewClientEmailSender);
+        DatosClientes=findViewById(R.id.TextViewDatosCliente);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -56,6 +59,11 @@ public class RegisterNewClient extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(Getintent().getDataString()!=null){
+            DatosClientes.setText(Getintent().getData().toString());
+        }
+
+
     }
 
     private void AddNewClient() {
@@ -100,6 +108,10 @@ public class RegisterNewClient extends AppCompatActivity {
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(getApplicationContext(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
+    }
+    private Intent Getintent(){
+        Intent Datoscliente=getIntent();
+        return Datoscliente;
     }
 
 

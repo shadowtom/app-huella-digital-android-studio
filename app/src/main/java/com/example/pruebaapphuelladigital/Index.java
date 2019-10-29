@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -41,6 +42,14 @@ public class Index extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent ToRegisterNewClient = new Intent(getApplicationContext(),RegisterNewClient.class);
+            }
+        });
+        listclients.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
+                Intent TodatosClient =new Intent(getApplicationContext(),RegisterNewClient.class);
+                TodatosClient.putExtra("DatosCliente", listclients.getItemIdAtPosition(posicion) );
+                startActivity(TodatosClient);
             }
         });
 
@@ -125,6 +134,10 @@ public class Index extends AppCompatActivity {
                 pullToRefresh.setRefreshing(false);
             }
         });
+    }
+    public void selecciondedatos(int position){
+        listclients.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listclients.setItemChecked(position, true);
     }
 
 

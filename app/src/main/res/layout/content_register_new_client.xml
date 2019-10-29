@@ -78,4 +78,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NewClientEmail" />
 
+    <TextView
+        android:id="@+id/TextViewDatosCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewClientEmailSender"
+        app:layout_constraintVertical_bias="0.237" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
