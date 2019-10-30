@@ -21,10 +21,8 @@
     <string name="EmailSender">Desea enviar correo electronico de confirmacion?</string>
 
 
-
-
-
     <string name="google_status_fmt" />
     <string name="title_activity_index">Index</string>
     <string name="title_activity_register_new_client">RegisterNewClient</string>
+    <string name="title_activity_firma_contrato">FirmaContrato</string>
 </resources>

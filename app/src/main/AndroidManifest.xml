@@ -15,6 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".FirmaContrato"
+            android:label="@string/title_activity_firma_contrato"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".RegisterNewClient"
             android:label="@string/title_activity_register_new_client"
             android:parentActivityName=".Index"
@@ -29,7 +33,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />
-        <activity android:name=".VerificationActivity"/>
+        <activity android:name=".VerificationActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
