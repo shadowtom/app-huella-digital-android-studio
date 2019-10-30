@@ -109,4 +109,8 @@ public class VerificationActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
+
+    private void registrarcorreo(){
+
+    }
 }

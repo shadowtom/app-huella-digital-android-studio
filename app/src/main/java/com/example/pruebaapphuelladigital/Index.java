@@ -10,11 +10,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,7 +41,6 @@ public class Index extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         pullToRefresh=findViewById(R.id.pullToRefresh);
-        listarclientes();
         refresh();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,40 +62,25 @@ public class Index extends AppCompatActivity {
 
     }
     public void listarclientes(){
-
-
-
-        Cliente cliente=new Cliente();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mRootChild = mDatabase.child("Cliente");
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
-        listclients = (ListView) findViewById(R.id.ListViewClients);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,arrayList);
+        listclients = findViewById(R.id.ListViewClients);
         listclients.setAdapter(adapter);
-
-        mRootChild.addChildEventListener(new ChildEventListener(){
+        // Read from the database
+        mRootChild.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s){
-                String string = dataSnapshot.getValue(String.class);
-                arrayList.add(string);
-                adapter.notifyDataSetChanged();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                adapter.add(value);
             }
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s){
 
-            }
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot){
-                String string = dataSnapshot.getValue(String.class);
-                arrayList.remove(string);
-                adapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s){
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError){
-
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("Fail", "Failed to read value.", error.toException());
             }
         });
     }

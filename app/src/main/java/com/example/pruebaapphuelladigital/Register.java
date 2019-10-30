@@ -1,9 +1,11 @@
 package com.example.pruebaapphuelladigital;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,7 +13,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -24,7 +29,7 @@ public class Register extends AppCompatActivity {
     DatabaseReference databasereference;
     FirebaseDatabase firebaseDatabase;
     Spinner countryCodes;
-
+    private FirebaseAuth mAuth;
     Button btnlogin,btnregister,btngoogleregister;
     EditText EtextEmail,Etextpassword,Etextnombre,EtextPhone;
     @Override
@@ -43,6 +48,7 @@ public class Register extends AppCompatActivity {
         countryCodes=findViewById(R.id.CountryCodeSpinner);
         countryCodes.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, CountryData.countryNames));
         btngoogleregister=findViewById(R.id.GoogleRegister);
+        mAuth = FirebaseAuth.getInstance();
         //--------------------------------------------------
         //Boton de registro con google
         btngoogleregister.setOnClickListener(new View.OnClickListener() {
@@ -51,16 +57,21 @@ public class Register extends AppCompatActivity {
 
             }
         });
+        //-------
+        final String code = CountryData.countryAreaCodes[countryCodes.getSelectedItemPosition()];
+        final String phone = EtextPhone.getText().toString().trim();
+        //-------------
+        final String Nombre = Etextnombre.getText().toString(),pass = Etextpassword.getText().toString(),correo = EtextEmail.getText().toString(),PhoneNumber=EtextPhone.getText().toString();
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                areaCode();
-                register();
+                areaCode(code,phone);
+                register(Nombre,pass,correo,PhoneNumber);
+                registeremail(correo,pass);
             }
         });
     }
-    private void register() {
-        String Nombre = Etextnombre.getText().toString(),pass = Etextpassword.getText().toString(),correo = EtextEmail.getText().toString(),PhoneNumber=EtextPhone.getText().toString();
+    private void register(String Nombre,String pass,String correo,String PhoneNumber) {
         Cliente user = new Cliente();
         user.setID(UUID.randomUUID().toString());
         user.setNombre(Nombre);
@@ -68,10 +79,10 @@ public class Register extends AppCompatActivity {
         user.setCorreo(correo);
         user.setPhone(PhoneNumber);
         databasereference.child("Usuario").child(user.getID()).setValue(user);
+
     }
-    private void areaCode() {
-        String code = CountryData.countryAreaCodes[countryCodes.getSelectedItemPosition()];
-        String phone = EtextPhone.getText().toString().trim();
+    private void areaCode(String code,String phone) {
+
         //Conditional if phone is empty
         String phoneError = getResources().getString(R.string.phoneError);
         String phonelength = getResources().getString(R.string.phonelenght);
@@ -98,6 +109,27 @@ public class Register extends AppCompatActivity {
         firebaseDatabase = firebaseDatabase.getInstance();
         databasereference = firebaseDatabase.getReference();
 
+    }
+    private void registeremail(String correo, String pass){
+        mAuth.createUserWithEmailAndPassword(correo, pass)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            //Logica luego de loguearse
+
+                        } else {
+
+                            // If sign in fails, display a message to the user.
+                            Log.w("signInWithEmail:failure", task.getException());
+                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        // ...
+                    }
+                });
     }
 
 
