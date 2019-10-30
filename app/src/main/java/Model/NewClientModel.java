@@ -1,6 +1,8 @@
 package Model;
 
-public class NewClientModel {
+import java.io.Serializable;
+
+public class NewClientModel implements Serializable {
     private String ID;
     private String DNI,Nombre,correo,phone,FechaDeNacimiento;
     //Constructor nuevo cliente

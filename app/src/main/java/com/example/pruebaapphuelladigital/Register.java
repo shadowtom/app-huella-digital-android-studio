@@ -27,7 +27,6 @@ public class Register extends AppCompatActivity {
 
     Button btnlogin,btnregister,btngoogleregister;
     EditText EtextEmail,Etextpassword,Etextnombre,EtextPhone;
-    String Nombre = Etextnombre.getText().toString(),pass = Etextpassword.getText().toString(),correo = EtextEmail.getText().toString(),PhoneNumber=EtextPhone.getText().toString();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +40,7 @@ public class Register extends AppCompatActivity {
         EtextPhone=findViewById(R.id.Phonenumber);
         btnlogin=findViewById(R.id.Login);
         btnregister=findViewById(R.id.Register);
+        countryCodes=findViewById(R.id.CountryCodeSpinner);
         countryCodes.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, CountryData.countryNames));
         btngoogleregister=findViewById(R.id.GoogleRegister);
         //--------------------------------------------------
@@ -60,6 +60,7 @@ public class Register extends AppCompatActivity {
         });
     }
     private void register() {
+        String Nombre = Etextnombre.getText().toString(),pass = Etextpassword.getText().toString(),correo = EtextEmail.getText().toString(),PhoneNumber=EtextPhone.getText().toString();
         Cliente user = new Cliente();
         user.setID(UUID.randomUUID().toString());
         user.setNombre(Nombre);

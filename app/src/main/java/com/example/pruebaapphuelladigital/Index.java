@@ -22,6 +22,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import Model.Cliente;
+
 public class Index extends AppCompatActivity {
     private ListView listclients;
     SwipeRefreshLayout pullToRefresh;
@@ -42,11 +44,13 @@ public class Index extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent ToRegisterNewClient = new Intent(getApplicationContext(),RegisterNewClient.class);
+                startActivity(ToRegisterNewClient);
             }
         });
         listclients.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
+                selecciondedatos(posicion);
                 Intent TodatosClient =new Intent(getApplicationContext(),RegisterNewClient.class);
                 TodatosClient.putExtra("DatosCliente", listclients.getItemIdAtPosition(posicion) );
                 startActivity(TodatosClient);
@@ -55,6 +59,10 @@ public class Index extends AppCompatActivity {
 
     }
     public void listarclientes(){
+
+
+
+        Cliente cliente=new Cliente();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mRootChild = mDatabase.child("Cliente");
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
@@ -91,45 +99,11 @@ public class Index extends AppCompatActivity {
     public void refresh(){
         //setting an setOnRefreshListener on the SwipeDownLayout
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-            DatabaseReference mRootChild = mDatabase.child("Nombre de la base de datos");
-            int Refreshcounter = 1; //Counting how many times user have refreshed the layout
 
             @Override
             public void onRefresh() {
                 //Here you can update your data from internet or from local SQLite data
-                mRootChild.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        String string = dataSnapshot.getValue(String.class);
-                        arrayList.add(string);
-                        adapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-                        String string = dataSnapshot.getValue(String.class);
-                        arrayList.remove(string);
-                        adapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-                Refreshcounter = Refreshcounter + 1;
+                listarclientes();
                 adapter.notifyDataSetChanged();
                 pullToRefresh.setRefreshing(false);
             }

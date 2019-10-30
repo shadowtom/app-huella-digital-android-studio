@@ -59,6 +59,7 @@ public class RegisterNewClient extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         if(Getintent().getDataString()!=null){
             DatosClientes.setText(Getintent().getData().toString());
         }
