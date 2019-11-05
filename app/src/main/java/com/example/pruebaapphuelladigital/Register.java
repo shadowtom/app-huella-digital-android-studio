@@ -57,22 +57,18 @@ public class Register extends AppCompatActivity {
 
             }
         });
-        //-------
-        final String code = CountryData.countryAreaCodes[countryCodes.getSelectedItemPosition()];
-        final String phone = EtextPhone.getText().toString().trim();
-        //-------------
-        final String Nombre = Etextnombre.getText().toString(),pass = Etextpassword.getText().toString(),correo = EtextEmail.getText().toString(),PhoneNumber=EtextPhone.getText().toString();
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                areaCode(code,phone);
-                register(Nombre,pass,correo,PhoneNumber);
-                registeremail(correo,pass);
+                areaCode();
+                register();
+                registeremail();
             }
         });
     }
-    private void register(String Nombre,String pass,String correo,String PhoneNumber) {
-        Cliente user = new Cliente();
+    private void register() {
+        String Nombre = Etextnombre.getText().toString(),pass = Etextpassword.getText().toString(),correo = EtextEmail.getText().toString(),PhoneNumber=EtextPhone.getText().toString();
+        Cliente user= new Cliente();
         user.setID(UUID.randomUUID().toString());
         user.setNombre(Nombre);
         user.setClave(pass);
@@ -81,7 +77,9 @@ public class Register extends AppCompatActivity {
         databasereference.child("Usuario").child(user.getID()).setValue(user);
 
     }
-    private void areaCode(String code,String phone) {
+    private void areaCode() {
+         String code = CountryData.countryAreaCodes[countryCodes.getSelectedItemPosition()];
+         String phone = EtextPhone.getText().toString().trim();
 
         //Conditional if phone is empty
         String phoneError = getResources().getString(R.string.phoneError);
@@ -110,7 +108,8 @@ public class Register extends AppCompatActivity {
         databasereference = firebaseDatabase.getReference();
 
     }
-    private void registeremail(String correo, String pass){
+    private void registeremail(){
+        String pass = Etextpassword.getText().toString(),correo = EtextEmail.getText().toString();
         mAuth.createUserWithEmailAndPassword(correo, pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

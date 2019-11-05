@@ -52,7 +52,10 @@ public class Login extends AppCompatActivity {
         ButtonFingerprint=findViewById(R.id.img_btn_fingerprint);
         UserMail=findViewById(R.id.Mail);
         UserPass=findViewById(R.id.password);
+        mAuth = FirebaseAuth.getInstance();
         //--------------------------------------------------------------
+
+        initializeFirebase();
 
         //Email and password auth
 
@@ -77,27 +80,24 @@ public class Login extends AppCompatActivity {
         ButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginfirebase();
+                Signinwithemailandpass();
             }
         });
 
 
     }
-/*    public void VoiceItVoiceAuth(){
-        VoiceIt2 myVoiceIt = new VoiceIt2("key_fb599719b198460c8ac9150145fdcc26","tok_14b861f38e364f25a7a9d05ba7a779b3");
+    /*    public void VoiceItVoiceAuth(){
+            VoiceIt2 myVoiceIt = new VoiceIt2("key_fb599719b198460c8ac9150145fdcc26","tok_14b861f38e364f25a7a9d05ba7a779b3");
 
 
-    }
-    public void Googleauth(){
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-    }*/
-    private void loginfirebase() {
-        String email=UserMail.getText().toString(),password=UserPass.getText().toString();
-        Signinwithemailandpass(email,password);
-    }
+        }
+        public void Googleauth(){
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail()
+                    .build();
+        }*/
+
     private void initializeFirebase() {
         FirebaseApp.initializeApp(this);
         firebaseDatabase = firebaseDatabase.getInstance();
@@ -134,21 +134,17 @@ public class Login extends AppCompatActivity {
         final BiometricPromptHelper promptHelper=new BiometricPromptHelper();
         promptHelper.helper();
     }
-    @Override
-    public void onStart(){
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-    }
-    private void Signinwithemailandpass(String email,String password){
 
+
+    private void Signinwithemailandpass(){
+        String email=UserMail.getText().toString(),password=UserPass.getText().toString();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //Logica luego de loguearse
-
+                            Intent toindex= new Intent(getApplicationContext(),Index.class);
+                            startActivity(toindex);
                         } else {
 
                             // If sign in fails, display a message to the user.
@@ -162,7 +158,5 @@ public class Login extends AppCompatActivity {
                     }
                 });
     }
-    private void Signinwithphone(){
 
-    }
 }

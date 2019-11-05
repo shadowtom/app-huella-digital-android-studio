@@ -110,7 +110,4 @@ public class VerificationActivity extends AppCompatActivity {
         }
     };
 
-    private void registrarcorreo(){
-
-    }
 }

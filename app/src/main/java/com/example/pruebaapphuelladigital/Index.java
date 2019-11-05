@@ -39,8 +39,12 @@ public class Index extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        listclients=findViewById(R.id.ListViewClients);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
+        listclients.setAdapter(adapter);
         setSupportActionBar(toolbar);
         pullToRefresh=findViewById(R.id.pullToRefresh);
+        listarclientes();
         refresh();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,23 +68,29 @@ public class Index extends AppCompatActivity {
     public void listarclientes(){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mRootChild = mDatabase.child("Cliente");
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,arrayList);
-        listclients = findViewById(R.id.ListViewClients);
-        listclients.setAdapter(adapter);
-        // Read from the database
-        mRootChild.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                adapter.add(value);
-            }
 
+        mRootChild.addChildEventListener(new ChildEventListener(){
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("Fail", "Failed to read value.", error.toException());
+            public void onChildAdded(DataSnapshot dataSnapshot, String s){
+                String string = dataSnapshot.getValue().toString();
+                arrayList.add(string);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s){
+
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot){
+                String string = dataSnapshot.getValue().toString();
+                arrayList.remove(string);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s){
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError){
+
             }
         });
     }
